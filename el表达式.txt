@@ -1,0 +1,27 @@
+﻿
+<%@ page isELIgnored="true"%>
+表示是否禁用EL语言,TRUE表示禁止.FALSE表示不禁
+止.JSP2.0中默认的启用EL语言.
+
+EL 除了提供方便存取变量的语法之外，它另外一个方便的功能就是：自动转变类型
+
+
+在 EL中则可以使用param和paramValues两者来取得数据。
+${param.name}
+${paramValues.name}
+
+这里param 的功能和request.getParameter(String name)相同，而paramValues和
+request.getParameterValues(String name)相同。
+
+pageContext
+pageContext取得其他有关用户要求或页面的详细信息。
+    ${pageContext.request.queryString}         取得请求的参数字符串
+    ${pageContext.request.requestURL}         取得请求的URL，但不包括请求之参数字符串
+    ${pageContext.request.contextPath}         服务的web application 的名称
+    ${pageContext.request.method}           取得HTTP 的方法(GET、POST)
+    ${pageContext.request.protocol}         取得使用的协议(HTTP/1.1、HTTP/1.0)
+    ${pageContext.request.remoteUser}         取得用户名称
+    ${pageContext.request.remoteAddr }         取得用户的IP 地址
+    ${pageContext.session.new}             判断session 是否为新的
+    ${pageContext.session.id}               取得session 的ID
+    ${pageContext.servletContext.serverInfo}   取得主机端的服务信息 

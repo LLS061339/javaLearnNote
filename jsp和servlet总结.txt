@@ -1,0 +1,80 @@
+﻿jsp新建项目步骤和注意要点：
+
+1.建立项目：new project->web-> Dynamic Web Project
+
+2.jsp文件或静态资源放在WebContent文件夹里；servlet文件放在Java Resources->src里
+
+3.访问tomcat的时候，url是http://localhost:8080/项目名/index.jsp
+
+4.引入sql的jar包，外部引入的jar包放在WebContent/WEB-INF/lib（不需要加入build path 它会自动识别）
+
+5.如果找不到HttpSession类的话，在window->preferrnces->java->build path->classpath variables增加一个servlet-api.jar（在tomcat的安装目录下的lib文件夹里）
+
+6.关于编码的问题：保持 文件编码、<%@ page%>中的编码、<meta>中的编码均为utf-8，就可以保证输出为中文；接受请求中的参数时，需要通过new String(request.getParameter("username").getBytes("ISO-8859-
+1"), "UTF-8")转换，才能够得到中文数据
+
+java web项目开发：
+项目一般采取MVC（Model-View-Controler）方式分层：一般分成action、service、dao、bo层
+
+servlet放在action中。改名成**Action。用一个UserAction通过判断页面请求参数action=??来转发到不同方法
+
+
+action 用来处理页面，获取请求参数，输入验证，跳转页面
+
+Service用来处理业务逻辑，包括调用dao操作数据库，并返回结果给action
+
+dao 提供基础的bo类增删查改方法（对应数据库操作），及其他封装数据库操作的方法；不涉及任何业务逻辑
+（持久化层，操作数据库）
+
+bo 基本数据对象。用来存储数据。（基础类，它的属性与数据库表字段一一对应）
+
+
+
+回顾：
+
+1.jsp在html代码中执行java代码（<% java代码 %>）
+可以用来在页面中通过getAttribute得到servlet中setAttribute的值
+
+2.hidden类型的input 表示隐藏域，可以用来传值不被用户看到
+
+3.增删改查insert、delete、update、select
+INSERT INTO `t_user` (`username`, `password`) VALUES ('username', 'password');
+
+UPDATE `t_user` SET `password`='newpassword1' WHERE `id`='id';
+
+SELECT t.username,t.id  FROM t_user t   where t.loginTime>1 order by t.loginTime desc limit 3
+# SELECT 字段名+(别名)   FROM 表名 表的别名 [where 条件   order by 表名.字段名  desc (倒序) limit 数字  截取前几条]
+ 
+limit 起始条数，往后多少条
+select count(*) from-----查出记录的条数
+
+查看和当前时间相差2小时的数据：
+where timestampdiff(hour,t.lastActivateTime, now())<=2
+
+4.session中设置属性
+request.getSession().setAttribute("id", id);
+删除session中的属性
+session.removeAttribute("username");
+
+5.Request.getRequestURI().toString();得到端口后的地址；例如：http://localhost:8080/manageUser/UserAction?action=search中的/manageUser/UserAction?action=search
+
+6.可以建立一个对象来存储多个数据。
+查表可以用ArrayList。调用对象的多个数据，在resultSet中get。然后再add到ArrayList中去，
+用setAttribute传输给页面
+
+7.mysql有关：
+在workbench中的可视化建表中：
+AI为自增属性；PK为主键；NN非空；
+
+建表是可以给字段设置默认值和数据类型；
+
+
+在默认值defaul中右键中提示：
+CURRENT_TIMESTAMP可以用来设置注册时间（DATETIME）
+
+CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP设置时间，只要这一行数据发生改变，就会变成当前时间
+
+
+8.假设jsp页面不允许被直接访问
+①可以通过过滤器filter设置
+②如果jsp页面中没有servlet设置在request中的标记变量，则跳转回servlet

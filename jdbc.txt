@@ -1,0 +1,53 @@
+﻿
+引入mysql-connector-java-5.1.37-bin.jar
+
+①driver
+
+Class.forName("com.mysql.jdbc.Driver");
+
+②connection
+
+Conntction connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/数据库名","数据库用户名","数据库密码");
+
+③statement
+
+Statement statement = connection.creatStatement();
+
+④resultSet
+
+在查询的时候用；
+
+ResultSet resultSet = statement.executeQuery("SELECT * FROM t_user");
+
+while(resultSet.next()){ syso输出查询结果 }
+
+插入时不需要resultSet，用int接收executeUpdate（）；
+
+"INSERT INTO `t_user` (`username`, `password`) VALUES ('d', '222222')"作为形参
+
+
+**扩展
+
+1.了解prepareStatement（为了防止sql注入）
+
+2.了解事务，事务可以begin和conmit和rollback
+
+3.批量执行 statement.executeBatch
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
