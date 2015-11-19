@@ -1,0 +1,32 @@
+﻿实现多线程的两种方法：继承Thread类和实现runnable接口
+
+①
+
+1.继承Thread类：
+
+类名 extend Thread;
+
+2.重写run方法（需要同时执行的线程内容）
+
+3.调用start方法启动线程（实例化自定义线程类，并调用它的start方法）
+
+可以直接调用实例本身的getName();得到线程的名字；用setName设置线程的名字，可以在外部也可以在构造器内赋值；
+
+②
+
+1.实现runnable接口
+
+类名 implements Runnable；
+
+2.重写run方法
+
+3.利用Thread类启动线程
+
+new Thread(Runnable target, String name).start();整个语句是利用Thread类启动线程
+			    设置线程名	
+
+③
+
+多线程的特点：线程可以同时启动；线程执行或切换的顺序由CPU随机分配；
+	      线程可以有自己的名字，在线程内部可以通过this.getName得到线程的名字
+	      在任何时候，都可以用Thread.currentThread().getName()来获取当前线程的名字

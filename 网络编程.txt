@@ -1,0 +1,29 @@
+﻿InputStream、OutputStream(二进制低级字节流)
+
+利用inputStreamReader和outputStream操作输入输出
+
+过程中需要用try/catch包起来（再用while（true）把try/catch包起来可以实现多次）
+
+服务器端：
+①new ServerSocket 实例，监听本机端口
+
+新建一个ServerSocket对象，形参是端口
+ServerSocket serverSocket = new ServerSocket(端口）；
+
+②调用serverSocket实例的accept方法，返回一个socket实例
+
+Socket socket = serverSocket.accept();
+
+③利用上一步返回的Socket实例，操作inputStream(通过socket.getInputStream得到)、outputStream(通过socket.getOutputStream得到)进行通信
+
+InputStream inputStream = socket.getInputStream;
+
+客户端：
+①new Socket实例;在构造方法中传入一个服务器IP和服务器端口
+
+Socket socket = new Socket(服务器ip,服务器端口);
+
+②利用Socket实例，操作inputStream、outputStream进行通信
+
+
+
